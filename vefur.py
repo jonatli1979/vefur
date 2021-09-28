@@ -17,7 +17,7 @@ import math
 
 #@st.cache(allow_output_mutation=True, hash_funcs={"_thread.RLock": lambda _: None})
 def init_connection():
-    return psycopg2.connect(database = st.secrets.db_credentials.db_name, user=st.secrets.db_credentials.username, password=st.secrets.db_credentials.password,host=st.secrets.db_credentials.url,port=st.secrets.db_credentials.port)
+    return psycopg2.connect(**st.secrets["postgres")
 conn = init_connection()
 
 
