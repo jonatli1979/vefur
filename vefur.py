@@ -7,13 +7,13 @@ Created on Tue Sep 14 09:16:26 2021
 """
 
 import streamlit as st
-import plotly.express as px
+
 import matplotlib.pyplot as plt
 import numpy as np
 
 import psycopg2
 import math
-from datetime import datetime
+
 
 #@st.cache(allow_output_mutation=True, hash_funcs={"_thread.RLock": lambda _: None})
 def init_connection():
