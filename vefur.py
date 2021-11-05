@@ -14,6 +14,8 @@ import numpy as np
 import psycopg2
 import math
 
+sidelist = st.sidebar('Hitamælingar',['Ljósleiðari', 'Hitanemar'])
+
 
 #@st.cache(allow_output_mutation=True, hash_funcs={"_thread.RLock": lambda _: None})
 def init_connection():
@@ -47,9 +49,9 @@ def data():
     N = np.array(N)
     N = N+5
     return S,N, ts,tn
-S_y,N_y, ts, tn=data()
 
-new_date = tn.strftime('%d.%m.%Y %H:%M:%S')
+
+
 def img():
     langsnid = plt.imread('img/langsnid.png')
     fig,axs = plt.subplots(3,1)
@@ -79,12 +81,17 @@ def img():
     #fig.savefig('ljosleidari.github.io/natthagi.svg', format='svg', dpi=1200)
     
     return fig
+if sidelist == 'Ljósleiðari':
+    
+    S_y,N_y, ts, tn=data()
+    new_date = tn.strftime('%d.%m.%Y %H:%M:%S')
+    plot = img()
+    
+    
+    st.title('Nátthagi, ljósleiðaramælingar')
+    st.write(str('Nýjasta mæling frá '+new_date))
+    st.pyplot(plot)
 
-plot = img()
-
-
-st.title('Nátthagi, ljósleiðaramælingar')
-st.write(str('Nýjasta mæling frá '+new_date))
-st.pyplot(plot)
-
+elif sidelist == 'Hitanemar':
+    st.text('Í vinnslu')
 #conn.close()
