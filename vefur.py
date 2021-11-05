@@ -24,7 +24,7 @@ def init_connection():
     return psycopg2.connect(**st.secrets["postgres"])
 conn = init_connection()
 
-
+@st.cache(ttl=600)
 def run_query(query):
 	with conn.cursor() as cur:
 		cur.execute(query)
