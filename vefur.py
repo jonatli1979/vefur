@@ -130,7 +130,7 @@ elif sidelist == 'Hitanemar':
         max_fylki.append(max_t[0][0])
     
     #start, stop = st.select_slider('Tímabil',options = [min(minnst_fylki),max(max_fylki)]) 
-    '''
+    
     start = st.date_input('Upphaf', min_value= min(minnst_fylki),max_value= max(max_fylki))
     if not start:
         stop = st.date_input('Lok',min_value = min(minnst_fylki), max_value = max(max_fylki))
@@ -138,9 +138,9 @@ elif sidelist == 'Hitanemar':
         stop = st.date_input('Lok', min_value = start, max_value = max(max_fylki))       
     start = start.strftime('%Y-%m-%d')
     stop = stop.strftime('%Y-%m-%d')                 
-    '''
-    start = '2021-07-03'
-    stop = '2021-07-15'
+    
+    #start = '2021-07-03'
+    #stop = '2021-07-15'
     ### Sæki gögn eftir vali og dagsetningu
     gogn = pd.DataFrame(columns= ['Time','Temp', 'Mælir'])
     for tafla in val:
