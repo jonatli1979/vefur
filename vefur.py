@@ -14,7 +14,7 @@ import numpy as np
 import psycopg2
 import math
 
-sidelist = st.sidebar('Hitamælingar',['Ljósleiðari', 'Hitanemar'])
+sidelist = st.sidebar.radio('Hitamælingar',['Ljósleiðari', 'Hitanemar'])
 
 
 #@st.cache(allow_output_mutation=True, hash_funcs={"_thread.RLock": lambda _: None})
