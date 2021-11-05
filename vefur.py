@@ -14,7 +14,8 @@ import numpy as np
 import psycopg2
 import math
 
-sidelist = st.sidebar.radio('Hitamælingar',['Ljósleiðari', 'Hitanemar'])
+tol = ['Forsíða', 'Ljósleiðari','Hitanemar']
+sidelist = st.sidebar.radio('Hitamælingar',tol)
 
 
 #@st.cache(allow_output_mutation=True, hash_funcs={"_thread.RLock": lambda _: None})
@@ -81,7 +82,12 @@ def img():
     #fig.savefig('ljosleidari.github.io/natthagi.svg', format='svg', dpi=1200)
     
     return fig
-if sidelist == 'Ljósleiðari':
+
+if sidelist == 'Forsíða':
+    st.title('Hitamælingar í Nátthaga')
+    st.subheader('Veldu úr listanum hér til vinstri')
+
+elif sidelist == 'Ljósleiðari':
     
     S_y,N_y, ts, tn=data()
     new_date = tn.strftime('%d.%m.%Y %H:%M:%S')
