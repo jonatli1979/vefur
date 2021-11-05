@@ -13,6 +13,7 @@ import numpy as np
 import pandas as pd
 import psycopg2
 import math
+import plotly.express as px
 
 tol = ['Forsíða', 'Ljósleiðari','Hitanemar']
 sidelist = st.sidebar.radio('Hitamælingar',tol)
