@@ -19,12 +19,12 @@ tol = ['Forsíða', 'Ljósleiðari','Hitanemar']
 sidelist = st.sidebar.radio('Hitamælingar',tol)
 
 ###   Gagnagrunnstenging ###
-@st.cache(allow_output_mutation=True)
+#@st.cache(allow_output_mutation=True)
 def init_connection():
     return psycopg2.connect(**st.secrets["postgres"])
 conn = init_connection()
 
-@st.cache(ttl=600)
+#@st.cache(ttl=600)
 def run_query(query):
 	with conn.cursor() as cur:
 		cur.execute(query)
