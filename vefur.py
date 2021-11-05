@@ -130,7 +130,7 @@ elif sidelist == 'Hitanemar':
     
     #start, stop = st.select_slider('Tímabil',options = [min(minnst_fylki),max(max_fylki)]) 
     
-    start = st.date_input('Upphaf',value= value = min(minnst_fylki), min_value= min(minnst_fylki),max_value= max(max_fylki))
+    start = st.date_input('Upphaf',value= min(minnst_fylki), min_value= min(minnst_fylki),max_value= max(max_fylki))
     if not start:
         stop = st.date_input('Lok',value = min(minnst_fylki),min_value = min(minnst_fylki), max_value = max(max_fylki))
     else:
