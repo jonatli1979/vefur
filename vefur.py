@@ -161,7 +161,7 @@ elif sidelist == 'Hitanemar':
 
 elif sidelist == 'Myndir':
 	blob_service_client = BlobServiceClient.from_connection_string(connect_str)
-	camera = st.radio('Myndavél',container)
+	camera = st.radio('Myndavél',containers)
 	container_name = camera
 	container_client = blob_service_client.get_container_client(container_name)
 	blob_list = container_client.list_blobs()
