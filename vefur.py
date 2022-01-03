@@ -179,7 +179,7 @@ elif sidelist == 'Myndir':
 	    fileList = fileList.append({'file':file_name, 'date':file_date, 'year':file_year,'month': file_month,'day':file_day,'hour':file_hour,'minute':file_minute}, ignore_index=True)
 	years = fileList['year'].unique()
 	selYear = st.radio('Ár',years)
-	months = fileList[fileList['year']==selYear].unique()
+	months = fileList[fileList['year']==selYear]['month'].unique()
 	selMonth =st.radio('Mánuður',months)
 	days = fileList[(fileList['year']==selYear) & (fileList['month']==selMonth)].unique()
 	selDay = st.radio('Dagur',days)
