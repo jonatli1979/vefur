@@ -28,7 +28,7 @@ def init_connection():
     return psycopg2.connect(**st.secrets["postgres"])
 conn = init_connection()
 ### Azure tenging ###
-connect_str = **st.secrets[azure]
+connect_str = st.secrets.azure.connect_str
 			  
 #@st.cache(ttl=600)
 def run_query(query):
