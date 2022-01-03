@@ -16,6 +16,7 @@ import math
 import plotly.express as px
 from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
 from PIL import Image
+from urllib.request import urlopen
 
 containers = ['natthagi1','natthagi2','natthagi3','stifla']
 tol = ['Forsíða', 'Ljósleiðari','Hitanemar', 'Myndir']
@@ -189,7 +190,7 @@ elif sidelist == 'Myndir':
 	selMinute = st.radio('Mínútur',minutes)
 	selFile = fileList[(fileList['year']==selYear) & (fileList['month']==selMonth) & (fileList['day']==selDay) & (fileList['hour']== selHour) & (fileList['minute'] == selMinute)].iloc[0,0]   
 	imageString = str('https://csb10033fff9dc1ffe0.blob.core.windows.net/'+camera+'/'+selFile)
-	st.image(Image.open(imageString))
+	st.image(Image.open(urlopen(imageString)))
 	
 	
 			   
