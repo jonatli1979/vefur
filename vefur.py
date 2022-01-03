@@ -14,16 +14,22 @@ import pandas as pd
 import psycopg2
 import math
 import plotly.express as px
+from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
+from PIL import Image
 
-tol = ['Forsíða', 'Ljósleiðari','Hitanemar']
+containers = ['natthagi1','natthagi2','natthagi3','stifla']
+tol = ['Forsíða', 'Ljósleiðari','Hitanemar', 'Myndir']
 sidelist = st.sidebar.radio('Hitamælingar',tol)
+
 
 ###   Gagnagrunnstenging ###
 #@st.cache(allow_output_mutation=True)
 def init_connection():
     return psycopg2.connect(**st.secrets["postgres"])
 conn = init_connection()
-
+### Azure tenging ###
+connect_str = **st.secrets[azure]
+			  
 #@st.cache(ttl=600)
 def run_query(query):
 	with conn.cursor() as cur:
@@ -152,3 +158,44 @@ elif sidelist == 'Hitanemar':
     fig = px.line(gogn, x='Time', y='Temp', color = 'Mælir')
     st.plotly_chart(fig,use_container_width = False)
     #conn.close()
+
+elif sidelist == 'Myndir':
+	blob_service_client = BlobServiceClient.from_connection_string(connect_str)
+	camera = st.radio('Myndavél',container)
+	container_name = camera
+	container_client = blob_service_client.get_container_client(container_name)
+	blob_list = container_client.list_blobs()
+
+	# Make list of files by date
+	fileList = pd.DataFrame(columns=['file', 'date','year','month','day','hour','minute'])
+	for blob in blob_list:
+	    file_name = blob.name
+	    file_date =blob.creation_time
+	    file_year = file_date.date().year
+	    file_month = file_date.date().month
+	    file_day = file_date.date().day
+	    file_hour = file_date.time().hour
+	    file_minute = file_date.time().minute
+	    fileList = fileList.append({'file':file_name, 'date':file_date, 'year':file_year,'month': file_month,'day':file_day,'hour':file_hour,'minute':file_minute}, ignore_index=True)
+	years = fileList['year'].unique()
+	selYear = st.radio('Ár',years)
+	months = fileList[fileList['year']==selYear].unique()
+	selMonth =st.radio('Mánuður',months)
+	days = fileList[(fileList['year']==selYear) & (fileList['month']==selMonth)].unique()
+	selDay = st.radio('Dagur',days)
+	hours = fileList[(fileList['year']==selYear) & (fileList['month']==selMonth) & (fileList['day']==selDay)].unique()
+	selHour = st.radio('Klukkustund',hours)
+	minutes = fileList[(fileList['year']==selYear) & (fileList['month']==selMonth) & (fileList['day']==selDay) & (fileList['hour']== selHour)].unique()
+	selMinutes = st.radio('Mínútur',minutes)
+	selFile = fileList[(fileList['year']==selYear) & (fileList['month']==selMonth) & (fileList['day']==selDay) & (fileList['hour']== selHour) & (fileList['minute'] == selMinute)].iloc[0,0]   
+	imageString = str('https://csb10033fff9dc1ffe0.blob.core.windows.net/'+camera+'/'+selFile)
+	st.image(Image.open(imageString)
+	
+	
+			   
+			   
+			   
+			   
+			   
+			   
+			   
