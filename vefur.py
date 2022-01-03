@@ -186,7 +186,7 @@ elif sidelist == 'Myndir':
 	hours = fileList[(fileList['year']==selYear) & (fileList['month']==selMonth) & (fileList['day']==selDay)]['hour'].unique()
 	selHour = st.radio('Klukkustund',hours)
 	minutes = fileList[(fileList['year']==selYear) & (fileList['month']==selMonth) & (fileList['day']==selDay) & (fileList['hour']== selHour)]['minute'].unique()
-	selMinutes = st.radio('Mínútur',minutes)
+	selMinute = st.radio('Mínútur',minutes)
 	selFile = fileList[(fileList['year']==selYear) & (fileList['month']==selMonth) & (fileList['day']==selDay) & (fileList['hour']== selHour) & (fileList['minute'] == selMinute)].iloc[0,0]   
 	imageString = str('https://csb10033fff9dc1ffe0.blob.core.windows.net/'+camera+'/'+selFile)
 	st.image(Image.open(imageString))
